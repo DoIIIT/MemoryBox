@@ -129,8 +129,8 @@ void setup() {
     while (1);  // don't do anything more
   }
 
-  // list files
-  printDirectory(SD.open("/"), 0);
+// list files
+//  printDirectory(SD.open("/"), 0);
   
   // Set volume for left, right channels. lower numbers == louder volume!
   musicPlayer.setVolume(20,20);
@@ -141,12 +141,6 @@ void setup() {
   // If DREQ is on an interrupt pin (on uno, #2 or #3) we can do background
   // audio playing
   musicPlayer.useInterrupt(VS1053_FILEPLAYER_PIN_INT);  // DREQ int
-  
-  // Play one file, don't return until complete
-//  Serial.println(F("Playing track 001"));
-//  musicPlayer.playFullFile("track001.mp3");
-  // Play another file in the background, REQUIRES interrupts!
-
   
 }
 
@@ -162,31 +156,49 @@ void loop() {
   // 'uid' will be populated with the UID, and uidLength will indicate
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
    success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, uid, &uidLength);
+   Serial.println(uid[0]);
   
   if (success) {
       if (uid[0] == 146) {
-        Serial.println("Found card 146 - Golden Gate Park");
-        musicPlayer.playFullFile("track002.mp3");
+        
+        Serial.println("Found card 236 - Playing purr");
+        musicPlayer.playFullFile("PURR.MP3");
       }
       if (uid[0] == 28) {
-        Serial.println("Found card 28 - Playing beach");
-        musicPlayer.playFullFile("track003.mp3");
+        Serial.println("Found card 28 - Playing restaurant");
+        musicPlayer.playFullFile("RESTAU~1.MP3");
+
       }     
-      if (uid[0] == 236) {
-        Serial.println("Found card 236");
+      if (uid[0] == 34) {
+        Serial.println("Found card 34 - Golden Gate Park");
+        musicPlayer.playFullFile("track002.mp3");
       }
       if (uid[0] == 60) {
-        Serial.println("Found card 60");
+        Serial.println("Found card 60 - playing bird");
+        musicPlayer.playFullFile("BIRD.MP3");
       }  
-       if (uid[0] == 34) {
-        Serial.println("Found card 34");
+       if (uid[0] == 236) {
+        Serial.println("Found card 236 - playing beach");
+        musicPlayer.playFullFile("track003.mp3");
+      }
+       if (uid[0] == 187) {
+        Serial.println("Found card 187 - playing hypermotard rev");
+        musicPlayer.playFullFile("moto.mp3");
+      }
+        if (uid[0] == 219) {
+        Serial.println("Found card 219 - spanish guitar");
+        musicPlayer.playFullFile("guitar.mp3");
+      }
+        if (uid[0] == 43) {
+        Serial.println("Found card 43- christmas bells");
+        musicPlayer.playFullFile("bells.mp3");
       }
   }
   delay(1000);
 
 //SOUND ---------------------------------------------------------------
 
-  // File is playing in the background
+  /*// File is playing in the background
   if (musicPlayer.stopped()) {
     Serial.println("Done playing music");  
     
@@ -202,13 +214,16 @@ void loop() {
         musicPlayer.playFullFile("track003.mp3");
       }     
       if (uid[0] == 236) {
-        Serial.println("Found card 236");
+        Serial.println("Found card 236 - Playing purr");
+        musicPlayer.playFullFile("PURR.MP3");
       }
       if (uid[0] == 60) {
-        Serial.println("Found card 60");
+        Serial.println("Found card 60 - playing bird");
+        musicPlayer.playFullFile("BIRD.MP3");
       }  
        if (uid[0] == 34) {
-        Serial.println("Found card 34");
+        Serial.println("Found card 34 - playing restaurant");
+        musicPlayer.playFullFile("RESTAU~1.MP3");
       }
   }
   delay(1000);
@@ -234,10 +249,10 @@ void loop() {
     }
   }
 
-  delay(100);
+  delay(100);*/
 }
 
-
+/*
 /// File listing helper
 void printDirectory(File dir, int numTabs) {
    while(true) {
@@ -262,5 +277,5 @@ void printDirectory(File dir, int numTabs) {
      }
      entry.close();
    }
-}
+}*/
 
